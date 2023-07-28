@@ -46,24 +46,40 @@ class HttpClient {
 	}
 
 	/**
-   * Send an HTTP request.
-   * @param {Object} request - The request configuration.
-   * @param {string} request.method - The HTTP method (e.g., 'get', 'post').
-   * @param {string} request.url - The URL to request.
-   * @param {Object} [request.headers] - The headers to include in the request.
-   * @param {Object} [request.params] - The query parameters to include in the request.
-   * @param {Object} [request.data] - The body of the request.
-   * @returns {Promise<Object>} - The response from the server.
-   */
+ * Send an HTTP request.
+ * @param {Object} request - The request configuration.
+ * @param {string} request.method - The HTTP method (e.g., 'get', 'post').
+ * @param {string} request.url - The URL to request.
+ * @param {Object} [request.headers] - The headers to include in the request.
+ * @param {Object} [request.params] - The query parameters to include in the request.
+ * @param {string|Object|Buffer} [request.data] - The body of the request. Can be a string, an object, or a Buffer.
+ * @returns {Promise<Object>} - The response from the server.
+ */
 	async send(request) {
-		try {
-			// Wrap the request in the limiter
-			const response = await this.limiter.schedule(() => this.client(request));
-			return response;
-		} catch (error) {
-			console.error(`Error: ${error.message}`);
-			throw error;
+		// Prepare the data to send
+		let data;
+		// eslint-disable-next-line no-undef
+		if (Buffer.isBuffer(request.data)) {
+			// If the data is a Buffer, send it as-is
+			data = request.data;
+		} else if (typeof request.data === 'object') {
+			// If the data is an object, convert it to JSON
+			data = JSON.stringify(request.data);
+		} else {
+			// If the data is a string, send it as-is
+			data = request.data;
 		}
+
+		// Send the request
+		let response = await this.limiter.schedule(() => axios({
+			method: request.method,
+			url: request.url,
+			headers: request.headers,
+			params: request.params,
+			data: data
+		}));
+
+		return response;
 	}
 }
 
