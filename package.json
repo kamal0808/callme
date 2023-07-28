@@ -1,0 +1,36 @@
+{
+  "name": "callme",
+  "version": "1.0.0",
+  "description": "Callme SDK will help communicate with any kind of digital and analog protocols",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --recursive --exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kamal0808/callme.git"
+  },
+  "keywords": [
+    "connect",
+    "api",
+    "integrate",
+    "protocol",
+    "sound",
+    "video",
+    "text"
+  ],
+  "author": "Kamal Khatwani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kamal0808/callme/issues"
+  },
+  "homepage": "https://github.com/kamal0808/callme#readme",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "lodash": "^4.17.21",
+    "winston-logstash-transporter": "^1.1.2"
+  },
+  "devDependencies": {
+    "mocha": "^10.2.0"
+  }
+}
