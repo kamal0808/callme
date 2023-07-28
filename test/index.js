@@ -22,6 +22,11 @@ describe("Simple Calculations", () => {
         it("should send a sample DELETE request");
         it("should send a sample PATCH request");
         it("should send a sample PUT request");
+        it("should send a sample HEAD request");
+        it("should send a sample CONNECT request");
+        it("should send a sample PATCH request");
+        it("should send a sample TRACE request");
+        it("should send a sample OPTIONS request");
 
     
     });
