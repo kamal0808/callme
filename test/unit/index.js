@@ -1,5 +1,5 @@
 const chai = require('chai');
-const HttpClient = require('../src/http/client');
+const HttpClient = require('../../src/http/client');
 
 const expect = chai.expect;
 
