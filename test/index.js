@@ -1,34 +1,19 @@
-// Requiring module
-const assert = require('assert');
+const chai = require('chai');
+const HttpClient = require('../src/http/client');
 
-// We can group similar tests inside a describe block
-describe("Simple Calculations", () => {
-    before(() => {
-        console.log("This part executes once before all tests");
-    });
+const expect = chai.expect;
 
-    after(() => {
-        console.log("This part executes once after all tests");
-    });
+describe('HttpClient', () => {
+  it('should make an HTTP request', async () => {
+    const client = new HttpClient();
+    const request = {
+      method: 'get',
+      url: 'http://example.com'
+    };
 
-    // We can add nested blocks for different tests
-    describe("A function that can send requests of all kinds of protocols", () => {
-        beforeEach(() => {
-            console.log("executes before every test");
-        });
+    const response = await client.send(request);
 
-        it("should send a sample GET request");
-        it("should send a sample POST request");
-        it("should send a sample DELETE request");
-        it("should send a sample PATCH request");
-        it("should send a sample PUT request");
-        it("should send a sample HEAD request");
-        it("should send a sample CONNECT request");
-        it("should send a sample PATCH request");
-        it("should send a sample TRACE request");
-        it("should send a sample OPTIONS request");
-
-    
-    });
-
+    expect(response.status).to.equal(200);
+    expect(response.data).to.be.a('string');
+  });
 });
