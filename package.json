@@ -6,7 +6,8 @@
   "scripts": {
     "test": "nyc --reporter=lcov mocha --recursive --exit",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "docs": "jsdoc -r ./src/"
   },
   "repository": {
     "type": "git",
